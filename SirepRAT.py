@@ -40,7 +40,6 @@ Date:       2018-08-19 08:03:08
 import argparse
 import logging
 import socket
-import string
 import sys
 
 import hexdump
@@ -143,7 +142,7 @@ def sirep_send_command(sirep_con_sock, sirep_command, print_printable_data=False
                     pass
 
             records.append(first_int + data)
-        except socket.timeout as e:
+        except socket.timeout:
             logging.debug("timeout in command communication. Assuming end of conversation")
             break
     return records
@@ -189,7 +188,7 @@ def main(args):
     return True
 
 
-if "__main__" == __name__:
+if __name__ == '__main__':
     available_command_types = [cmd_type.name for cmd_type in CommandType]
     example_usage = r'Usage example: python SirepRAT.py 192.168.3.17 GetFileFromDevice --remote_path ' \
                     r'C:\Windows\System32\hostname.exe'
