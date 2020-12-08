@@ -81,8 +81,8 @@ def get_command_ctor_arguments(sirep_command_type, args):
         pass
     else:
         logging.error("Command type not supported")
-    command_args = [arg for arg in command_args if arg is not None]
-    return command_args
+
+    return tuple(filter(None, command_args))
 
 
 def sirep_connect(sock, dst_ip, verbose=False):
