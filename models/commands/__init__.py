@@ -44,7 +44,7 @@ from .SirepCommand import SirepCommand
 
 __all__ = [
     "SirepCommand",
-    "LaunchCommandWithOutputCommand"
+    "LaunchCommandWithOutputCommand",
     "PutFileOnDeviceCommand",
     "GetFileFromDeviceCommand",
     "GetFileInformationFromDeviceCommand",

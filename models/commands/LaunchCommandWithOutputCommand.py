@@ -37,9 +37,9 @@ Date:       2018-02-04 08:03:08
 """
 
 import common.utils as utils
-from .SirepCommand import SirepCommand
 from common.constants import TRUE_FLAG_STRINGS, INT_SIZE
 from common.enums.CommandType import CommandType
+from .SirepCommand import SirepCommand
 
 
 class LaunchCommandWithOutputCommand(SirepCommand):

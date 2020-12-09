@@ -36,12 +36,10 @@ Author:     Dor Azouri <dor.azouri@safebreach.com>
 Date:       2018-02-04 08:03:08
 """
 
-import types
-
-from .enums.CommandType import CommandType
-from .enums.ResultRecordType import ResultRecordType
 from models import commands
 from models import results
+from .enums.CommandType import CommandType
+from .enums.ResultRecordType import ResultRecordType
 
 
 def _load_sirep_commands(module, base_class, type_enum, suffix_length):

@@ -37,10 +37,10 @@ Date:       2018-02-04 08:03:08
 """
 
 import common.utils as utils
-from .SirepCommand import SirepCommand
 from common.enums.CommandType import CommandType
 from common.constants import INT_SIZE
 from common.enums.WriteRecordType import WriteRecordType
+from .SirepCommand import SirepCommand
 
 
 class PutFileOnDeviceCommand(SirepCommand):
@@ -69,4 +69,3 @@ class PutFileOnDeviceCommand(SirepCommand):
         command_type, payload_length = utils.unpack_uints(command_buffer[:2*INT_SIZE])
         remote_path, data = utils.unpack_strings(command_buffer[2*INT_SIZE:])
         return PutFileOnDeviceCommand(remote_path, data)
-

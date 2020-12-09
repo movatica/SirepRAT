@@ -36,9 +36,9 @@ Author:     Dor Azouri <dor.azouri@safebreach.com>
 Date:       2018-02-04 08:03:08
 """
 
-from .SirepResult import SirepResult
-from common.constants import INT_SIZE
 import common.utils as utils
+from common.constants import INT_SIZE
+from .SirepResult import SirepResult
 
 
 class HResultResult(SirepResult):

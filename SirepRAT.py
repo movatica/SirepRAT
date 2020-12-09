@@ -87,12 +87,11 @@ def get_command_ctor_arguments(sirep_command_type, args):
 
 def sirep_connect(sock, dst_ip, verbose=False):
     # Connect the socket to the port where the server is listening
-    server_address = (dst_ip, SIREP_PORT)
-    logging.debug('Connecting to %s port %s' % server_address)
-    sock.connect(server_address)
+    logging.debug('Connecting to %s port %s', dst_ip, SIREP_PORT)
+    sock.connect((dst_ip, SIREP_PORT))
     # Receive the server version GUID that acts as the service banner
     version_guid_banner = sock.recv(SIREP_VERSION_GUID_LEN)
-    logging.info('Banner hex: %s' % version_guid_banner.hex())
+    logging.info('Banner hex: %s', version_guid_banner.hex())
     if verbose:
         print("RECV:")
         hexdump.hexdump(version_guid_banner)
@@ -101,7 +100,7 @@ def sirep_connect(sock, dst_ip, verbose=False):
 def sirep_send_command(sirep_con_sock, sirep_command, print_printable_data=False, verbose=False):
     # generate the commands's payload
     sirep_payload = sirep_command.serialize_sirep()
-    logging.info('Sirep payload hex: %s' % sirep_payload.hex())
+    logging.info('Sirep payload hex: %s', sirep_payload.hex())
     if verbose:
         print("SEND:")
         hexdump.hexdump(sirep_payload)
@@ -119,15 +118,15 @@ def sirep_send_command(sirep_con_sock, sirep_command, print_printable_data=False
             if not first_int:
                 break
             result_record_type = unpack_uint(first_int)
-            logging.debug("Result record type: %d" % result_record_type)
+            logging.debug("Result record type: %d", result_record_type)
             data_size = unpack_uint(sirep_con_sock.recv(INT_SIZE))
             if not data_size:
                 break
 
-            logging.debug("Receiving %d bytes" % data_size)
+            logging.debug("Receiving %d bytes", data_size)
             data = sirep_con_sock.recv(data_size)
 
-            logging.info("Result record data hex: %s" % data[:LOGGING_DATA_TRUNCATION].hex())
+            logging.info("Result record data hex: %s", data[:LOGGING_DATA_TRUNCATION].hex())
             if verbose:
                 print("RECV:")
                 hexdump.hexdump(data)
@@ -153,11 +152,7 @@ def main(args):
     command_type = args.command_type
     sirep_command_type = getattr(CommandType, command_type)
 
-    try:
-        command_args = get_command_ctor_arguments(sirep_command_type, args)
-    except:
-        logging.error("Wrong usage. use --help for instructions")
-        sys.exit()
+    command_args = get_command_ctor_arguments(sirep_command_type, args)
 
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

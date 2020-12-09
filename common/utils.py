@@ -152,15 +152,14 @@ def unpack_string_array(data):
 
 
 def unpack_bytes(data, data_size=None):
-    """
-    """
     if len(data) < INT_SIZE:
-        return ""
+        return ''
+
     if data_size is None:
         data_size = unpack_uint(data[:INT_SIZE])
         return struct.unpack("%ss" % data_size, data[INT_SIZE:INT_SIZE + data_size])[0]
-    else:
-        return struct.unpack("%ss" % data_size, data[:data_size])[0]
+
+    return struct.unpack("%ss" % data_size, data[:data_size])[0]
 
 
 def moustache_to_env_var(string_):
@@ -178,4 +177,3 @@ def windows_filetime_to_string(windows_filetime_low, windows_filetime_high):
 def windows_low_high_to_int(windows_int_low, windows_int_high):
     """Returns an int given the low and high integers"""
     return (windows_int_high << 33) | windows_int_low
-
