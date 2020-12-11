@@ -62,7 +62,7 @@ class LaunchCommandWithOutputCommand(SirepCommand):
         self.command_line_string = command_line_string
         self.parameters_string = utils.moustache_to_env_var(parameters_string)
         self.base_directory_path = base_directory_path
-        self.as_logged_on_user = True if str(as_logged_on_user).lower() in TRUE_FLAG_STRINGS else False
+        self.as_logged_on_user = (str(as_logged_on_user).lower() in TRUE_FLAG_STRINGS)
         if self.as_logged_on_user:
             self.command_line_string = \
                 LaunchCommandWithOutputCommand.IMPERSONATE_LOGGED_ON_USER_PREFIX + self.command_line_string
